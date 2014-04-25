@@ -13,27 +13,54 @@ using System.Windows.Media;
 
 namespace TrackingApp
 {
-    public partial class AddPackage : PhoneApplicationPage
+    public partial class EditPackagePage : PhoneApplicationPage
     {
-        public AddPackage()
+        public EditPackagePage()
         {
             InitializeComponent();
         }
 
-        private void SaveNewPackage(object sender, EventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string name, tn;
-            Carriers carrier = Carriers.INVALID;
-            if(ValidateFields(out name, out tn, out carrier))
+            if (DataContext == null)
             {
-                App.ViewModel.SavePackage(new PackageViewModel() { Name = name, TrackingNumber = tn, Carrier = carrier});
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                string selectedIndex = "";
+                if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))
+                {
+                    DataContext = App.ViewModel.Items[selectedIndex];
+                }
+            }
+
+            PackageViewModel package = (PackageViewModel)DataContext;
+            NameInputField.Text = package.Name;
+            TrackingNumberInputField.Text = package.TrackingNumber;
+            switch (package.Carrier)
+            {
+                case Carriers.UPS:
+                    UPSButton.IsChecked = true;
+                    break;
+                case Carriers.FEDEX:
+                    FedExButton.IsChecked = true;
+                    break;
+                case Carriers.DHL:
+                    DHLButton.IsChecked = true;
+                    break;
+                case Carriers.USPS:
+                    USPSButton.IsChecked = true;
+                    break;
             }
         }
 
-        private void DeleteNewPackage(object sender, EventArgs e)
+        private void SavePackage(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            string name, tn;
+            Carriers carrier = Carriers.INVALID;
+            if (ValidateFields(out name, out tn, out carrier))
+            {
+                App.ViewModel.Items.Remove((PackageViewModel)DataContext);
+                App.ViewModel.SavePackage(new PackageViewModel() { Name = name, TrackingNumber = tn, Carrier = carrier });
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            }
         }
 
         private bool ValidateFields(out string name, out string trackingNumber, out Carriers carrier)
@@ -92,7 +119,6 @@ namespace TrackingApp
                 NameInputField.BorderBrush = new SolidColorBrush(Color.FromArgb(191, 255, 255, 255));
             }
         }
-
 
         private void ValidateTrackingNumberInputField(object sender, RoutedEventArgs e)
         {
