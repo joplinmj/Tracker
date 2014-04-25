@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
@@ -73,7 +74,27 @@ namespace TrackingApp.ViewModels
                 }
             }
         }
+
+        private DateTime _deliverydate;
+        /// <summary>
+        /// The delivery date of the package
+        /// </summary>
+        public DateTime DeliveryDate
+        {
+            get
+            {
+                return _deliverydate;
+            }
+            set
+            {
+                if (value != _deliverydate)
+                {
+                    _deliverydate = value;
+                    NotifyPropertyChanged("Delivery Date");
+                }
+            }
         
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

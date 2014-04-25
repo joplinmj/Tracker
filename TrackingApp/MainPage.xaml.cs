@@ -48,7 +48,7 @@ namespace TrackingApp
 
         private void NavigateAddPackage(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/AddPackage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/PackageFormPage.xaml", UriKind.Relative));
         }
 
         private void NavigateSort(object sender, EventArgs e)

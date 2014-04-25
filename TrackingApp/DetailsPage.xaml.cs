@@ -49,7 +49,7 @@ namespace TrackingApp
 
         private void NavigateEditPackage(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/EditPackagePage.xaml?selectedItem=" + ((PackageViewModel)DataContext).TrackingNumber, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/PackageFormPage.xaml?selectedItem=" + ((PackageViewModel)DataContext).TrackingNumber, UriKind.Relative));
         }
 
         private void TrackInBrowser(object sender, System.Windows.Input.GestureEventArgs e)

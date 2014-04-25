@@ -83,7 +83,6 @@ C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\EditPackagePage.g
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\FilterPage.g.cs
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\HistoryPage.g.cs
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\MainPage.g.cs
-C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\AddPackage.g.cs
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\SortPage.g.cs
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\TrackingApp.g.resources
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\TrackingApp.Resources.AppResources.resources
@@ -153,3 +152,4 @@ C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\AppManifest.xaml
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\Properties\WMAppManifest.xml
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\TrackingApp_Debug_AnyCPU.xap
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\XapCacheFile.xml
+C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\PackageFormPage.g.cs

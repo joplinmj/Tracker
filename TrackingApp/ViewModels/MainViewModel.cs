@@ -34,6 +34,7 @@ namespace TrackingApp.ViewModels
         public void RemovePackage(PackageViewModel package)
         {
             Items.Remove(package);
+            SaveAll();
         }
 
         public void SavePackage(PackageViewModel package)

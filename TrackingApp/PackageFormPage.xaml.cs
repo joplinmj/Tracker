@@ -13,41 +13,61 @@ using System.Windows.Media;
 
 namespace TrackingApp
 {
-    public partial class EditPackagePage : PhoneApplicationPage
+    public partial class PackageFormPage : PhoneApplicationPage
     {
-        public EditPackagePage()
+        public PackageFormPage()
         {
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void CarrierSelectionMade(object sender, RoutedEventArgs e)
         {
-            if (DataContext == null)
+            CarrierFieldWarning.Visibility = Visibility.Collapsed;
+        }
+
+        private void DeletePackage(object sender, EventArgs e)
+        {
+            // If we are editing an item, delete it
+            if (DataContext != null)
             {
-                string selectedIndex = "";
-                if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))
-                {
-                    DataContext = App.ViewModel.Items[selectedIndex];
-                }
+                App.ViewModel.RemovePackage((PackageViewModel)DataContext);
             }
 
-            PackageViewModel package = (PackageViewModel)DataContext;
-            NameInputField.Text = package.Name;
-            TrackingNumberInputField.Text = package.TrackingNumber;
-            switch (package.Carrier)
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+         
+            string selectedIndex = "";
+            if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))
             {
-                case Carriers.UPS:
-                    UPSButton.IsChecked = true;
-                    break;
-                case Carriers.FEDEX:
-                    FedExButton.IsChecked = true;
-                    break;
-                case Carriers.DHL:
-                    DHLButton.IsChecked = true;
-                    break;
-                case Carriers.USPS:
-                    USPSButton.IsChecked = true;
-                    break;
+                DataContext = App.ViewModel.Items[selectedIndex];
+
+                PackageViewModel package = (PackageViewModel)DataContext;
+                NameInputField.Text = package.Name;
+                TrackingNumberInputField.Text = package.TrackingNumber;
+                switch (package.Carrier)
+                {
+                    case Carriers.UPS:
+                        UPSButton.IsChecked = true;
+                        break;
+                    case Carriers.FEDEX:
+                        FedExButton.IsChecked = true;
+                        break;
+                    case Carriers.DHL:
+                        DHLButton.IsChecked = true;
+                        break;
+                    case Carriers.USPS:
+                        USPSButton.IsChecked = true;
+                        break;
+                }
+
+                PageTitle.Text = "edit package";
+            }
+            else
+            {
+                PageTitle.Text = "add package";
             }
         }
 
@@ -55,15 +75,21 @@ namespace TrackingApp
         {
             string name, tn;
             Carriers carrier = Carriers.INVALID;
-            if (ValidateFields(out name, out tn, out carrier))
+            DateTime date;
+            if (ValidateFields(out name, out tn, out carrier, out date))
             {
-                App.ViewModel.Items.Remove((PackageViewModel)DataContext);
-                App.ViewModel.SavePackage(new PackageViewModel() { Name = name, TrackingNumber = tn, Carrier = carrier });
+                // If we are editing an item, delete the original first
+                if (DataContext != null)
+                {
+                    App.ViewModel.Items.Remove((PackageViewModel)DataContext);
+                }
+
+                App.ViewModel.SavePackage(new PackageViewModel() { Name = name, TrackingNumber = tn, Carrier = carrier, DeliveryDate = date });
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
         }
 
-        private bool ValidateFields(out string name, out string trackingNumber, out Carriers carrier)
+        private bool ValidateFields(out string name, out string trackingNumber, out Carriers carrier, out DateTime date)
         {
             bool isFormValid = true;
 
@@ -109,6 +135,14 @@ namespace TrackingApp
                 isFormValid = false;
             }
 
+            DateTime? _date = DeliveryDateInputField.Value;
+            date = (DateTime)_date;
+            if (_date == null)
+            {
+                DeliveryDateInputField.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                isFormValid = false;
+            }
+
             return isFormValid;
         }
 
@@ -126,11 +160,6 @@ namespace TrackingApp
             {
                 TrackingNumberInputField.BorderBrush = new SolidColorBrush(Color.FromArgb(191, 255, 255, 255));
             }
-        }
-
-        private void CarrierSelectionMade(object sender, RoutedEventArgs e)
-        {
-            CarrierFieldWarning.Visibility = Visibility.Collapsed;
         }
     }
 }
