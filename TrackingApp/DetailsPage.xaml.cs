@@ -39,7 +39,7 @@ namespace TrackingApp
 
         private void DeletePackage(object sender, EventArgs e)
         {
-            if (MessageBox.Show("This action will be permanent.", "Delete package.", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            if (MessageBox.Show("This action will be permanent", "Delete package", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 App.ViewModel.RemovePackage((PackageViewModel)DataContext);
                 App.ViewModel.SaveAll();

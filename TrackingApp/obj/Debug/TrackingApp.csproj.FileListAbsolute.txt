@@ -79,7 +79,6 @@ C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\TrackingApp.cspro
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\App.g.cs
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\AboutPage.g.cs
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\DetailsPage.g.cs
-C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\EditPackagePage.g.cs
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\FilterPage.g.cs
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\HistoryPage.g.cs
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\MainPage.g.cs

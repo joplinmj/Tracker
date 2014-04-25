@@ -12,7 +12,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    d:DesignHeight ="1000"
+    d:DesignHeight ="1500"
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -49,7 +49,7 @@
                             <TextBlock Grid.Column="0" Margin="12,0,20,0" Text="Carrier" Style="{StaticResource PhoneTextLargeStyle}"/>
                             <TextBlock Grid.Column="1" x:Name="CarrierFieldWarning" FontSize="{StaticResource PhoneFontSizeSmall}" Foreground="#FFFF4141" Text="Please select one" VerticalAlignment="Center" Visibility="Collapsed"/>
                         </Grid>
-                        <StackPanel Margin="12,0">
+                        <StackPanel Margin="0,12">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0.5*" />
@@ -69,6 +69,10 @@
                     <StackPanel>
                         <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="Delivery Date"/>
                         <toolkit:DatePicker x:Name="DeliveryDateInputField" />
+                        <StackPanel Margin="0,12" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="Reminder"/>
+                            <toolkit:ToggleSwitch x:Name="RemindersEnabled" IsChecked="False" Content=""/>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

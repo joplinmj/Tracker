@@ -78,13 +78,20 @@ namespace TrackingApp
             DateTime date;
             if (ValidateFields(out name, out tn, out carrier, out date))
             {
+                PackageViewModel package = new PackageViewModel() { Name = name, TrackingNumber = tn, Carrier = carrier, DeliveryDate = date };
+
                 // If we are editing an item, delete the original first
                 if (DataContext != null)
                 {
                     App.ViewModel.Items.Remove((PackageViewModel)DataContext);
                 }
 
-                App.ViewModel.SavePackage(new PackageViewModel() { Name = name, TrackingNumber = tn, Carrier = carrier, DeliveryDate = date });
+                if ((bool)RemindersEnabled.IsChecked == true)
+                {
+                    App.ViewModel.CreateReminder(package);
+                }
+
+                App.ViewModel.SavePackage(package);
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
         }

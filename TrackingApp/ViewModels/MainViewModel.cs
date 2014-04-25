@@ -10,6 +10,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using TrackingApp.Resources;
+using Microsoft.Phone.Scheduler;
 
 namespace TrackingApp.ViewModels
 {
@@ -29,6 +30,15 @@ namespace TrackingApp.ViewModels
         {
             get;
             private set;
+        }
+
+        public void CreateReminder(PackageViewModel package)
+        {
+            Reminder deliveryReminder = new Reminder(package.TrackingNumber);
+            deliveryReminder.BeginTime = System.DateTime.Now.AddSeconds(30);
+            deliveryReminder.ExpirationTime = System.DateTime.Now.AddSeconds(610);
+            deliveryReminder.Content = "\"" + package.Name + "\" will be arriving today!";
+            ScheduledActionService.Add(deliveryReminder);
         }
 
         public void RemovePackage(PackageViewModel package)
