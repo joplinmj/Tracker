@@ -43,14 +43,33 @@ namespace TrackingApp.ViewModels
 
         public void RemovePackage(PackageViewModel package)
         {
+            Debug.WriteLine("Deleting package (" + package.TrackingNumber + ") and writing out to storage...");
             Items.Remove(package);
             SaveAll();
+            Debug.WriteLine("...Saving completed.");
+        }
+
+        public void RemoveReminder(string trackingNumber)
+        {
+            ScheduledAction reminder = ScheduledActionService.Find(trackingNumber);
+            if (reminder != null)
+            {
+                ScheduledActionService.Remove(trackingNumber);
+                Debug.WriteLine("Removed reminder for package (" + trackingNumber + ")");
+            }
+            else
+            {
+                Debug.WriteLine("No reminder found for package (" + trackingNumber + ")");
+            }
+
         }
 
         public void SavePackage(PackageViewModel package)
         {
+            Debug.WriteLine("Adding package (" + package.TrackingNumber + ") and writing out to storage...");
             App.ViewModel.Items.Add(package);
             SaveAll();
+            Debug.WriteLine("...saving completed.");
         }
 
         public void SaveAll()
