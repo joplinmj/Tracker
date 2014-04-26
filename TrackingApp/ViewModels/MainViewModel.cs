@@ -39,6 +39,20 @@ namespace TrackingApp.ViewModels
             deliveryReminder.ExpirationTime = System.DateTime.Now.AddSeconds(610);
             deliveryReminder.Content = "\"" + package.Name + "\" will be arriving today!";
             ScheduledActionService.Add(deliveryReminder);
+            Debug.WriteLine("Reminded added for package (" + package.TrackingNumber + ")");
+        }
+
+        public bool HasReminder(PackageViewModel package)
+        {
+            ScheduledAction reminder = ScheduledActionService.Find(package.TrackingNumber);
+            if (reminder != null)
+            {
+                Debug.WriteLine("Reminder found for package (" + package.TrackingNumber + ")");
+                return true;
+            }
+
+            Debug.WriteLine("No reminder found for package (" + package.TrackingNumber + ")");
+            return false;
         }
 
         public void RemovePackage(PackageViewModel package)
@@ -49,19 +63,17 @@ namespace TrackingApp.ViewModels
             Debug.WriteLine("...Saving completed.");
         }
 
-        public void RemoveReminder(string trackingNumber)
+        public void RemoveReminder(PackageViewModel package)
         {
-            ScheduledAction reminder = ScheduledActionService.Find(trackingNumber);
-            if (reminder != null)
+            try
             {
-                ScheduledActionService.Remove(trackingNumber);
-                Debug.WriteLine("Removed reminder for package (" + trackingNumber + ")");
+                ScheduledActionService.Remove(package.TrackingNumber);
+                Debug.WriteLine("Reminded removed for package (" + package.TrackingNumber + ")");
             }
-            else
+            catch (Exception error)
             {
-                Debug.WriteLine("No reminder found for package (" + trackingNumber + ")");
+                Debug.WriteLine("ERROR: " + error.Message);
             }
-
         }
 
         public void SavePackage(PackageViewModel package)

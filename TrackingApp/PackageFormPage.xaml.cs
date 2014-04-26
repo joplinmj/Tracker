@@ -38,7 +38,6 @@ namespace TrackingApp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-         
             string selectedIndex = "";
             if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))
             {
@@ -62,6 +61,10 @@ namespace TrackingApp
                         USPSButton.IsChecked = true;
                         break;
                 }
+                if (App.ViewModel.HasReminder(package))
+                {
+                    RemindersEnabled.IsChecked = true;
+                }
 
                 PageTitle.Text = "edit package";
             }
@@ -81,9 +84,14 @@ namespace TrackingApp
                 PackageViewModel package = new PackageViewModel() { Name = name, TrackingNumber = tn, Carrier = carrier, DeliveryDate = date };
 
                 // If we are editing an item, delete the original first
+                // Delete any reminders attached to it as well
                 if (DataContext != null)
                 {
                     App.ViewModel.Items.Remove((PackageViewModel)DataContext);
+                    if(App.ViewModel.HasReminder((PackageViewModel)DataContext))
+                    {
+                        App.ViewModel.RemoveReminder((PackageViewModel)DataContext);
+                    }
                 }
 
                 if ((bool)RemindersEnabled.IsChecked == true)
