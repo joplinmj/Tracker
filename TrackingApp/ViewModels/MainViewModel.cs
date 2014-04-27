@@ -11,6 +11,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using TrackingApp.Resources;
 using Microsoft.Phone.Scheduler;
+using Windows.ApplicationModel.Appointments;
 
 namespace TrackingApp.ViewModels
 {
@@ -19,6 +20,7 @@ namespace TrackingApp.ViewModels
         public MainViewModel()
         {
             this.Items = new TrackingNumberCollection();
+            LoadCalendar();
         }
 
         /// <summary>
@@ -26,10 +28,23 @@ namespace TrackingApp.ViewModels
         /// </summary>
         public TrackingNumberCollection Items { get; set; }
 
+        public AppointmentCalendar Calendar { get; set; }
+
         public bool IsDataLoaded
         {
             get;
             private set;
+        }
+
+        async public void CreateCalendarEvent(PackageViewModel package)
+        {
+            Appointment appointment = new Appointment();
+            appointment.StartTime = package.DeliveryDate.AddHours(13);
+            appointment.Duration = TimeSpan.FromHours(2);
+            appointment.Details = package.Name;
+            appointment.Subject = "Package Incoming!";
+
+            await Calendar.SaveAppointmentAsync(appointment);
         }
 
         public void CreateReminder(PackageViewModel package)
@@ -53,6 +68,67 @@ namespace TrackingApp.ViewModels
 
             Debug.WriteLine("No reminder found for package (" + package.TrackingNumber + ")");
             return false;
+        }
+
+        /// <summary>
+        /// Loads the existing PackageDeliveryDates calendar or
+        /// creates a new one if it does not exist.
+        /// </summary>
+        async private void LoadCalendar()
+        {
+            this.Calendar = null;
+            var appointmentStore = await AppointmentManager.RequestStoreAsync(AppointmentStoreAccessType.AppCalendarsReadWrite);
+            var calendars = await appointmentStore.FindAppointmentCalendarsAsync();
+
+            foreach (var calendar in calendars)
+            {
+                if (calendar.DisplayName == "PackageDeliveryDates")
+                {
+                    Calendar = calendar;
+                    break;
+                }
+            }
+
+            if (Calendar == null)
+            {
+                Calendar = await appointmentStore.CreateAppointmentCalendarAsync("PackageDeliveryDates");
+            }
+        }
+
+        /// <summary>
+        /// Creates and adds a few ItemViewModel objects into the Items collection.
+        /// </summary>
+        public void LoadData()
+        {
+            IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
+            if (isolatedStorage.FileExists("packages.xml"))
+            {
+                Debug.WriteLine("Loading from Isolated Storage.");
+                XmlSerializer serializer = new XmlSerializer(typeof(TrackingNumberCollection));
+
+                using (IsolatedStorageFileStream stream = isolatedStorage.OpenFile("packages.xml", FileMode.Open))
+                {
+                    TrackingNumberCollection newItems = (TrackingNumberCollection)serializer.Deserialize(stream);
+                    foreach (PackageViewModel item in newItems)
+                    {
+                        App.ViewModel.Items.Add(item);
+                    }
+                }
+
+                Debug.WriteLine("Loaded " + App.ViewModel.Items.Count + " packages.");
+            }
+            else
+            {
+                Debug.WriteLine("No data found, creating fake data.");
+                this.Items.Add(new PackageViewModel() { Name = "Sim Card Holder", TrackingNumber = "563256038607", Carrier = Carriers.FEDEX });
+                this.Items.Add(new PackageViewModel() { Name = "Investment Book", TrackingNumber = "1Z602E8E0323063092", Carrier = Carriers.UPS });
+                this.Items.Add(new PackageViewModel() { Name = "Voodoo Labs Power Pedal 2", TrackingNumber = "C11119708769009", Carrier = Carriers.ONTRAC });
+                this.Items.Add(new PackageViewModel() { Name = "BLU Soldier", TrackingNumber = "548260028870", Carrier = Carriers.FEDEX });
+                this.Items.Add(new PackageViewModel() { Name = "Diablo 3: Reaper of Souls", TrackingNumber = "528938939970", Carrier = Carriers.FEDEX });
+                this.Items.Add(new PackageViewModel() { Name = "Amzer Case", TrackingNumber = "9400110200828120779216", Carrier = Carriers.USPS });
+            }
+
+            this.IsDataLoaded = true;
         }
 
         public void RemovePackage(PackageViewModel package)
@@ -94,42 +170,6 @@ namespace TrackingApp.ViewModels
             serializer.Serialize(stream, Items);
             stream.Close();
             stream.Dispose();
-        }
-
-        /// <summary>
-        /// Creates and adds a few ItemViewModel objects into the Items collection.
-        /// </summary>
-        public void LoadData()
-        {
-            IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
-            if (isolatedStorage.FileExists("packages.xml"))
-            {
-                Debug.WriteLine("Loading from Isolated Storage.");
-                XmlSerializer serializer = new XmlSerializer(typeof(TrackingNumberCollection));
-
-                using (IsolatedStorageFileStream stream = isolatedStorage.OpenFile("packages.xml", FileMode.Open))
-                {
-                    TrackingNumberCollection newItems = (TrackingNumberCollection)serializer.Deserialize(stream);
-                    foreach (PackageViewModel item in newItems)
-                    {
-                        App.ViewModel.Items.Add(item);
-                    }
-                }
-
-                Debug.WriteLine("Loaded " + App.ViewModel.Items.Count + " packages.");
-            }
-            else
-            {
-                Debug.WriteLine("No data found, creating fake data.");
-                this.Items.Add(new PackageViewModel() { Name = "Sim Card Holder", TrackingNumber = "563256038607", Carrier = Carriers.FEDEX });
-                this.Items.Add(new PackageViewModel() { Name = "Investment Book", TrackingNumber = "1Z602E8E0323063092", Carrier = Carriers.UPS });
-                this.Items.Add(new PackageViewModel() { Name = "Voodoo Labs Power Pedal 2", TrackingNumber = "C11119708769009", Carrier = Carriers.ONTRAC });
-                this.Items.Add(new PackageViewModel() { Name = "BLU Soldier", TrackingNumber = "548260028870", Carrier = Carriers.FEDEX });
-                this.Items.Add(new PackageViewModel() { Name = "Diablo 3: Reaper of Souls", TrackingNumber = "528938939970", Carrier = Carriers.FEDEX });
-                this.Items.Add(new PackageViewModel() { Name = "Amzer Case", TrackingNumber = "9400110200828120779216", Carrier = Carriers.USPS });
-            }
-
-            this.IsDataLoaded = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

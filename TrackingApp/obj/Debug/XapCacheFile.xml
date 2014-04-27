@@ -1,6 +1,6 @@
-﻿<xapCache source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\TrackingApp_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="4/26/2014 6:51:14 PM">
-  <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\resources.pri" archivePath="resources.pri" lastWriteTime="4/26/2014 6:50:22 PM" />
-  <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\TrackingApp.dll" archivePath="TrackingApp.dll" lastWriteTime="4/26/2014 6:51:13 PM" />
+﻿<xapCache source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\TrackingApp_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="4/26/2014 7:41:00 PM">
+  <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\resources.pri" archivePath="resources.pri" lastWriteTime="4/26/2014 7:40:59 PM" />
+  <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\TrackingApp.dll" archivePath="TrackingApp.dll" lastWriteTime="4/26/2014 7:40:58 PM" />
   <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="4/18/2014 9:54:38 PM" />
   <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Assets\AppBar\add.png" archivePath="Assets\AppBar\add.png" lastWriteTime="1/1/2013 3:57:00 PM" />
   <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Assets\AppBar\delete.png" archivePath="Assets\AppBar\delete.png" lastWriteTime="1/1/2013 3:57:00 PM" />
@@ -27,7 +27,7 @@
   <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="4/18/2014 9:54:38 PM" />
   <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="4/18/2014 9:54:38 PM" />
   <file source="C:\Users\Andrew\Documents\GitHub\Tracker\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll" archivePath="Microsoft.Phone.Controls.Toolkit.dll" lastWriteTime="4/19/2014 12:07:02 AM" />
-  <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="4/26/2014 6:46:49 PM" />
-  <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\MDILProjectFiles.xml" archivePath="MDILProjectFiles.xml" lastWriteTime="4/26/2014 6:51:14 PM" />
-  <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\AppxManifest.xml" archivePath="AppxManifest.xml" lastWriteTime="4/26/2014 6:48:17 PM" />
+  <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="4/26/2014 7:39:38 PM" />
+  <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\MDILProjectFiles.xml" archivePath="MDILProjectFiles.xml" lastWriteTime="4/26/2014 7:40:59 PM" />
+  <file source="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Bin\Debug\AppxManifest.xml" archivePath="AppxManifest.xml" lastWriteTime="4/26/2014 7:39:37 PM" />
 </xapCache>

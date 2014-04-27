@@ -94,7 +94,11 @@ namespace TrackingApp
                     }
                 }
 
-                if ((bool)RemindersEnabled.IsChecked == true)
+                if ((bool)AddToCalendar.IsChecked == true)
+                {
+                    App.ViewModel.CreateCalendarEvent(package);
+                }
+                else if ((bool)RemindersEnabled.IsChecked == true)
                 {
                     App.ViewModel.CreateReminder(package);
                 }
