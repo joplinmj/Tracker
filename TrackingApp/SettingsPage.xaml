@@ -34,11 +34,11 @@
                     <StackPanel Margin="0,12">
                         <TextBlock Margin="0,0,0,24" Text="Package Defaults" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                         <StackPanel Orientation="Horizontal">
-                            <toolkit:ToggleSwitch Content="" />
+                            <toolkit:ToggleSwitch x:Name="ShowInCalendarToggle" Content="" />
                             <TextBlock Text="Show In Calendar" Style="{StaticResource PhoneTextLargeStyle}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <toolkit:ToggleSwitch Content="" />
+                            <toolkit:ToggleSwitch x:Name="RemindersToggle" Content="" />
                             <TextBlock Text="Reminders" Style="{StaticResource PhoneTextLargeStyle}"/>
                         </StackPanel>
                     </StackPanel>
@@ -46,18 +46,18 @@
                         <TextBlock Margin="0,0,0,12" Text="Calendar" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                         <StackPanel>
                             <TextBlock Text="Delivery Title" Style="{StaticResource PhoneTextLargeStyle}"/>
-                            <TextBox Text="Package Incoming!" />
+                            <TextBox x:Name="DeliveryTitleInput" Text="Package Incoming!" />
                         </StackPanel>
                         <StackPanel>
                             <TextBlock Text="Delivery Time" Style="{StaticResource PhoneTextLargeStyle}"/>
-                            <toolkit:TimePicker Value="3:00 PM"/>
+                            <toolkit:TimePicker x:Name="DeliveryTimeInput" Value="3:00 PM"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Margin="0,12">
                         <TextBlock Margin="0,0,0,12" Text="Reminders" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                         <StackPanel>
                             <TextBlock Text="Time Of Day" Style="{StaticResource PhoneTextLargeStyle}"/>
-                            <toolkit:TimePicker Value="10:00 AM"/>
+                            <toolkit:TimePicker x:Name="ReminderTimeInput" Value="10:00 AM"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -65,4 +65,11 @@
         </Grid>
     </Grid>
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False" >
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/check.png" Text="Apply" Click="ApplyChanges"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/cancel.png" Text="Discard" Click="NavigateMain"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+    
 </phone:PhoneApplicationPage>

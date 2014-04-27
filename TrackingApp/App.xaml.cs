@@ -38,11 +38,17 @@ namespace TrackingApp
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
+        private static IsolatedStorageSettings _settings = null;
         public static IsolatedStorageSettings Settings
         {
             get
             {
-                return IsolatedStorageSettings.ApplicationSettings;
+                if (_settings == null)
+                {
+                    _settings = IsolatedStorageSettings.ApplicationSettings;
+                }
+
+                return _settings;
             }
         }
 
@@ -81,6 +87,32 @@ namespace TrackingApp
                 // Caution:- Use this under debug mode only. Application that disables user idle detection will continue to run
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
+            }
+
+            ValidateSettings();
+        }
+
+        private void ValidateSettings()
+        {
+            if (!Settings.Contains("ShowInCalendar"))
+            {
+                Settings["ShowInCalendar"] = false;
+            }
+            if (!Settings.Contains("Reminders"))
+            {
+                Settings["Reminders"] = false;
+            }
+            if (!Settings.Contains("DeliveryTitle"))
+            {
+                Settings["DeliveryTitle"] = "Package Incoming!";
+            }
+            if (!Settings.Contains("DeliveryTime"))
+            {
+                Settings["DeliveryTime"] = DateTime.Today.AddHours(15).ToString("h:mm tt");
+            }
+            if (!Settings.Contains("ReminderTime"))
+            {
+                Settings["ReminderTime"] = DateTime.Today.AddHours(10).ToString("h:mm tt");
             }
         }
 

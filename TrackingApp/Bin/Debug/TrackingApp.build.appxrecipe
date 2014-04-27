@@ -178,6 +178,12 @@
     <AppxPackagedFile Include="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Assets\AppBar\add.png">
       <PackagePath>Assets\AppBar\add.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Assets\AppBar\cancel.png">
+      <PackagePath>Assets\AppBar\cancel.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Assets\AppBar\check.png">
+      <PackagePath>Assets\AppBar\check.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\Assets\AppBar\delete.png">
       <PackagePath>Assets\AppBar\delete.png</PackagePath>
     </AppxPackagedFile>

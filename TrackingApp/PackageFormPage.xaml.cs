@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using TrackingApp.ViewModels;
 using TrackingApp.Resources;
 using System.Windows.Media;
+using System.IO.IsolatedStorage;
 
 namespace TrackingApp
 {
@@ -72,6 +73,9 @@ namespace TrackingApp
             {
                 PageTitle.Text = "add package";
             }
+
+            AddToCalendar.IsChecked = (bool)App.Settings["ShowInCalendar"];
+            RemindersEnabled.IsChecked = (bool)App.Settings["Reminders"];
         }
 
         private void SavePackage(object sender, EventArgs e)

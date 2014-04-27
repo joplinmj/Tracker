@@ -5,6 +5,8 @@
     <File>TrackingApp.dll</File>
     <File>Assets\AlignmentGrid.png</File>
     <File>Assets\AppBar\add.png</File>
+    <File>Assets\AppBar\cancel.png</File>
+    <File>Assets\AppBar\check.png</File>
     <File>Assets\AppBar\delete.png</File>
     <File>Assets\AppBar\edit.png</File>
     <File>Assets\AppBar\save.png</File>

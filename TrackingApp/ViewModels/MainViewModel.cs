@@ -39,10 +39,10 @@ namespace TrackingApp.ViewModels
         async public void CreateCalendarEvent(PackageViewModel package)
         {
             Appointment appointment = new Appointment();
-            appointment.StartTime = package.DeliveryDate.AddHours(13);
+            appointment.StartTime = (DateTime)App.Settings["DeliveryTime"];
             appointment.Duration = TimeSpan.FromHours(2);
             appointment.Details = package.Name;
-            appointment.Subject = "Package Incoming!";
+            appointment.Subject = (string)App.Settings["DeliveryTitle"];
 
             await Calendar.SaveAppointmentAsync(appointment);
         }
