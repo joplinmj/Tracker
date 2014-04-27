@@ -8,6 +8,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TrackingApp.Resources;
 using TrackingApp.ViewModels;
+using System.IO.IsolatedStorage;
 
 namespace TrackingApp
 {
@@ -36,6 +37,14 @@ namespace TrackingApp
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
+
+        public static IsolatedStorageSettings Settings
+        {
+            get
+            {
+                return IsolatedStorageSettings.ApplicationSettings;
+            }
+        }
 
         /// <summary>
         /// Constructor for the Application object.

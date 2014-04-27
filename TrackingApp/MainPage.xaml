@@ -67,7 +67,7 @@
                 <shell:ApplicationBarMenuItem Text="sort by..." Click="NavigateSort"/>
                 <shell:ApplicationBarMenuItem Text="filter by..." Click="NavigateFilter"/>
                 <shell:ApplicationBarMenuItem Text="history" Click="NavigateHistory"/>
-                <shell:ApplicationBarMenuItem Text="about" Click="NavigateAbout"/>
+                <shell:ApplicationBarMenuItem Text="settings" Click="NavigateSettings"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

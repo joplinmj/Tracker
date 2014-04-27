@@ -66,9 +66,9 @@ namespace TrackingApp
             NavigationService.Navigate(new Uri("/HistoryPage.xaml", UriKind.Relative));
         }
 
-        private void NavigateAbout(object sender, EventArgs e)
+        private void NavigateSettings(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
 
     }

@@ -297,6 +297,7 @@ C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\qualifiers.txt.in
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\ProjectArchitectures.txt
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\MDILProjectFiles.xml
+C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\SettingsPage.g.cs
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\Microsoft.Phone.Controls.Toolkit\layout.resfiles
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\Microsoft.Phone.Controls.Toolkit\layout.resfiles.intermediate
 C:\Users\Andrew\Documents\GitHub\Tracker\TrackingApp\obj\Debug\Microsoft.Phone.Controls.Toolkit\Resources.resfiles
