@@ -66,13 +66,17 @@
                             </Grid>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel>
+                    <StackPanel Margin="0,12">
                         <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="Delivery Date"/>
                         <toolkit:DatePicker x:Name="DeliveryDateInputField" />
-                        <StackPanel Margin="0,12" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="Reminder"/>
-                            <toolkit:ToggleSwitch x:Name="RemindersEnabled" IsChecked="False" Content=""/>
-                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Margin="0,12" Orientation="Horizontal">
+                        <toolkit:ToggleSwitch x:Name="AddToCalendar" IsChecked="False" Content=""/>
+                        <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="Show On Calendar"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,12" Orientation="Horizontal">
+                        <toolkit:ToggleSwitch x:Name="RemindersEnabled" IsChecked="False" Content=""/>
+                        <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="Reminder"/>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
