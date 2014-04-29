@@ -30,6 +30,15 @@ namespace TrackingApp
             NavigateMain(null, null);
         }
 
+        private void ClearAllData(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("This action will be permanent", "Delete all packages", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                App.ViewModel.ClearAllData();
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            }
+        }
+
         private void NavigateMain(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));

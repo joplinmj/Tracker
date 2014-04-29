@@ -60,6 +60,9 @@
                             <toolkit:TimePicker x:Name="ReminderTimeInput" Value="10:00 AM"/>
                         </StackPanel>
                     </StackPanel>
+                    <StackPanel Margin="0,12">
+                        <Button Content="clear all data" Click="ClearAllData"/>
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

@@ -36,6 +36,18 @@ namespace TrackingApp.ViewModels
             private set;
         }
 
+        public void ClearAllData()
+        {
+            Debug.WriteLine("Clearing data...");
+            for (int i = Items.Count-1; i >= 0; --i)
+            {
+                Debug.WriteLine("Deleting package (" + Items[i].TrackingNumber + ")");
+                RemovePackage(Items[i]);
+            }
+            Debug.WriteLine("...done clearing data");
+            Save();
+        }
+
         async public void CreateCalendarEvent(PackageViewModel package)
         {
             Appointment appointment = new Appointment();
@@ -189,15 +201,16 @@ namespace TrackingApp.ViewModels
         /// <param name="package"></param>
         public void RemovePackage(PackageViewModel package)
         {
-            Debug.WriteLine("Deleting package (" + package.TrackingNumber + ") and writing out to storage...");
-            Items.Remove(package);
+            Debug.WriteLine("Removing package (" + package.TrackingNumber + ")...");
             if (HasReminder(package))
             {
                 RemoveReminder(package);
             }
-            
-
-            Debug.WriteLine("...Saving completed.");
+            if (package.CalendarID != null)
+            {
+                RemoveCalendarEvent(package);
+            }
+            Items.Remove(package);
         }
 
         public void RemoveReminder(PackageViewModel package)
