@@ -68,7 +68,7 @@
                     </StackPanel>
                     <StackPanel Margin="0,12">
                         <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="Delivery Date"/>
-                        <toolkit:DatePicker x:Name="DeliveryDateInputField" />
+                        <toolkit:DatePicker x:Name="DeliveryDateInputField" Tap="PickDate"/>
                     </StackPanel>
                     <StackPanel Margin="0,12" Orientation="Horizontal">
                         <toolkit:ToggleSwitch x:Name="AddToCalendar" IsChecked="False" Content=""/>

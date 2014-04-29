@@ -16,6 +16,8 @@ namespace TrackingApp
 {
     public partial class PackageFormPage : PhoneApplicationPage
     {
+        private bool editInProgress = false;
+
         public PackageFormPage()
         {
             InitializeComponent();
@@ -39,44 +41,71 @@ namespace TrackingApp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string selectedIndex = "";
-            if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))
+            if (!editInProgress)
             {
-                DataContext = App.ViewModel.Items[selectedIndex];
-
-                PackageViewModel package = (PackageViewModel)DataContext;
-                NameInputField.Text = package.Name;
-                TrackingNumberInputField.Text = package.TrackingNumber;
-                switch (package.Carrier)
+                string selectedIndex = "";
+                if (NavigationContext.QueryString.TryGetValue("selectedItem", out selectedIndex))
                 {
-                    case Carriers.UPS:
-                        UPSButton.IsChecked = true;
-                        break;
-                    case Carriers.FEDEX:
-                        FedExButton.IsChecked = true;
-                        break;
-                    case Carriers.DHL:
-                        DHLButton.IsChecked = true;
-                        break;
-                    case Carriers.USPS:
-                        USPSButton.IsChecked = true;
-                        break;
-                }
-                if (App.ViewModel.HasReminder(package))
-                {
-                    RemindersEnabled.IsChecked = true;
-                }
+                    DataContext = App.ViewModel.Items[selectedIndex];
 
-                PageTitle.Text = "edit package";
+                    PackageViewModel package = (PackageViewModel)DataContext;
+                    NameInputField.Text = package.Name;
+                    TrackingNumberInputField.Text = package.TrackingNumber;
+                    DeliveryDateInputField.Value = package.DeliveryDate;
+                    switch (package.Carrier)
+                    {
+                        case Carriers.UPS:
+                            UPSButton.IsChecked = true;
+                            break;
+                        case Carriers.FEDEX:
+                            FedExButton.IsChecked = true;
+                            break;
+                        case Carriers.DHL:
+                            DHLButton.IsChecked = true;
+                            break;
+                        case Carriers.USPS:
+                            USPSButton.IsChecked = true;
+                            break;
+                    }
+
+                    if (App.ViewModel.HasReminder(package))
+                    {
+                        RemindersEnabled.IsChecked = true;
+                    }
+                    else
+                    {
+                        RemindersEnabled.IsChecked = false;
+                    }
+
+                    if (package.CalendarID != null)
+                    {
+                        AddToCalendar.IsChecked = true;
+                    }
+                    else
+                    {
+                        AddToCalendar.IsChecked = false;
+                    }
+
+                    PageTitle.Text = "edit package";
+                }
+                else
+                {
+                    PageTitle.Text = "add package";
+                    AddToCalendar.IsChecked = (bool)App.Settings["ShowInCalendar"];
+                    RemindersEnabled.IsChecked = (bool)App.Settings["Reminders"];
+                }
             }
             else
             {
-                PageTitle.Text = "add package";
+                editInProgress = false;
             }
-
-            AddToCalendar.IsChecked = (bool)App.Settings["ShowInCalendar"];
-            RemindersEnabled.IsChecked = (bool)App.Settings["Reminders"];
         }
+
+        private void PickDate(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            editInProgress = true;
+        }
+
 
         private void SavePackage(object sender, EventArgs e)
         {
@@ -91,23 +120,14 @@ namespace TrackingApp
                 // Delete any reminders attached to it as well
                 if (DataContext != null)
                 {
-                    App.ViewModel.Items.Remove((PackageViewModel)DataContext);
-                    if(App.ViewModel.HasReminder((PackageViewModel)DataContext))
-                    {
-                        App.ViewModel.RemoveReminder((PackageViewModel)DataContext);
-                    }
+                    App.ViewModel.EditPackage((PackageViewModel)DataContext, package, (bool)AddToCalendar.IsChecked, (bool)RemindersEnabled.IsChecked);
                 }
-
-                if ((bool)AddToCalendar.IsChecked == true)
+                else
                 {
-                    App.ViewModel.CreateCalendarEvent(package);
+                    App.ViewModel.AddPackage(package, (bool)AddToCalendar.IsChecked, (bool)RemindersEnabled.IsChecked);
                 }
-                else if ((bool)RemindersEnabled.IsChecked == true)
-                {
-                    App.ViewModel.CreateReminder(package);
-                }
-
-                App.ViewModel.SavePackage(package);
+                
+                App.ViewModel.Save();
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
         }

@@ -14,43 +14,21 @@ namespace TrackingApp.ViewModels
 {
     public class PackageViewModel : INotifyPropertyChanged
     {
-        private string _name;
+        private string _calendarid = null;
         /// <summary>
-        /// Name of the package
+        /// Reference to Calendar event localid
         /// </summary>
-        public string Name
+        public string CalendarID
         {
             get
             {
-                return _name;
+                return _calendarid;
             }
             set
             {
-                if (_name != value)
+                if (value != _calendarid)
                 {
-                    _name = value;
-                    NotifyPropertyChanged("Name");
-                }
-            }
-        }
-
-        private string _tn;
-        /// <summary>
-        /// Tracking Number for the package.
-        /// </summary>
-        /// <returns></returns>
-        public string TrackingNumber
-        {
-            get
-            {
-                return _tn;
-            }
-            set
-            {
-                if (value != _tn)
-                {
-                    _tn = value;
-                    NotifyPropertyChanged("TrackingNumber");
+                    _calendarid = value;
                 }
             }
         }
@@ -93,7 +71,48 @@ namespace TrackingApp.ViewModels
                     NotifyPropertyChanged("Delivery Date");
                 }
             }
-        
+
+        }
+
+        private string _name;
+        /// <summary>
+        /// Name of the package
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    NotifyPropertyChanged("Name");
+                }
+            }
+        }
+
+        private string _tn;
+        /// <summary>
+        /// Tracking Number for the package.
+        /// </summary>
+        /// <returns></returns>
+        public string TrackingNumber
+        {
+            get
+            {
+                return _tn;
+            }
+            set
+            {
+                if (value != _tn)
+                {
+                    _tn = value;
+                    NotifyPropertyChanged("TrackingNumber");
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

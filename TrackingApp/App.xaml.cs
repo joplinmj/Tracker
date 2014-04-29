@@ -15,7 +15,6 @@ namespace TrackingApp
     public partial class App : Application
     {
         private static MainViewModel viewModel = null;
-
         /// <summary>
         /// A static ViewModel used by the views to bind against.
         /// </summary>
@@ -39,6 +38,7 @@ namespace TrackingApp
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
         private static IsolatedStorageSettings _settings = null;
+        
         public static IsolatedStorageSettings Settings
         {
             get
@@ -108,11 +108,11 @@ namespace TrackingApp
             }
             if (!Settings.Contains("DeliveryTime"))
             {
-                Settings["DeliveryTime"] = DateTime.Today.AddHours(15).ToString("h:mm tt");
+                Settings["DeliveryTime"] = DateTime.Today.AddHours(15);
             }
             if (!Settings.Contains("ReminderTime"))
             {
-                Settings["ReminderTime"] = DateTime.Today.AddHours(10).ToString("h:mm tt");
+                Settings["ReminderTime"] = DateTime.Today.AddHours(10);
             }
         }
 

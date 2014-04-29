@@ -37,6 +37,10 @@
                     <TextBlock Text="Carrier" Style="{StaticResource PhoneTextAccentStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
                     <TextBlock Text="{Binding Carrier}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
                 </StackPanel>
+                <StackPanel Margin="0,12">
+                    <TextBlock Text="Delivery Date" Style="{StaticResource PhoneTextAccentStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                    <TextBlock x:Name="DeliveryDateField" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding DeliveryDate, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+                </StackPanel>
             </StackPanel>
         </Grid>
 
